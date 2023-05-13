@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
-import { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const app: Application = express();
 
@@ -15,10 +15,10 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
     
     // inserting a test data into mongodb
     /*
-    step1: interface
-    step2: schema
-    step3: model
-    step4: database query
+    step1: interface done
+    step2: schema   done
+    step3: model    done
+    step4: database query   done
     */
     
     
@@ -61,7 +61,33 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
         permanentAddress: { type: String, required: true },
       });
 
-    
+        // creating a model using schema
+      const User = model<IUser>('User', userSchema);
+
+      // database query using model
+      const createUserToDB = async () => {
+        const user = new User({
+            id: "123456790",
+            role: "student",
+            password: "123456",
+            name: {
+                firstName: "Shahid",
+                middleName: "Monowar",
+                lastName: "Monu",
+                },
+            gender: "male",
+            email: "abc@gmail.com",
+            contactNumber: "123456789",
+            emergencyContactNumber: "123456789",
+            presentAddress: "abcdef",
+            dateOfBirth: "1998-01-01",
+            permanentAddress: "abc",
+        });
+          await user.save(); 
+          console.log(user);
+        }
+
+        createUserToDB();
     
     // res.send('Hello World!');
     // next();
