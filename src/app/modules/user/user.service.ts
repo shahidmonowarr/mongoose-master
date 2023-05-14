@@ -26,3 +26,11 @@ export const getUserByIdFromDB = async (payload: string): Promise<IUser | null> 
 
 }
 
+// class -> Attach -> Method -> directly call using class instance
+
+export const getAdminUsersFromDB = async () => {
+
+    const admins = await User.getAdminUsers();
+    return admins;
+}
+
