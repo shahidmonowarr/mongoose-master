@@ -3,10 +3,14 @@ import User from "./user.model";
 
 // create user
 export const createUserToDB = async (payload: IUser): Promise<IUser> => {
-   const user = new User(payload);
-      await user.save(); 
-    //   console.log(user);
-        return user;
+
+    // creating a new user
+    const user = new User(payload); // User -> class, user -> instance
+    await user.save(); // built in instance method
+
+    user.fullName(); // custom instance method
+    console.log(user.fullName());
+    return user;
     }
 
 // find all users
@@ -21,5 +25,4 @@ export const getUserByIdFromDB = async (payload: string): Promise<IUser | null> 
     return user;
 
 }
-
 
